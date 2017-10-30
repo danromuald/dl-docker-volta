@@ -1,3 +1,5 @@
+# PyTorch Volta Deep Learning container on AWS P3
+
 ## Running PyTorch and Anaconda3 on Volta on Amazon EC2
 
 # 1. Introduction
@@ -68,7 +70,6 @@ Successfully tagged danulab/pytorch-dlimg:latest
 # 5. Test 
 
 # 6. Conclusion
-
 
 
 

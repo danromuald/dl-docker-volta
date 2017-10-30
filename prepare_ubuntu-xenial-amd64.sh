@@ -10,7 +10,7 @@
 # Vars
 __idVer__="17.10:v1.0"
 __author__="Dan R. Mbanga"
-VOLTA_BUILD_HOME_DIR="/opt/voltaPytorchBuild"
+VOLTA_BUILD_HOME_DIR="/opt/voltaBuild"
 
 # Mbanga, 17.10
 
@@ -49,12 +49,6 @@ apt-get install -y git \
 pip3 install --upgrade pip
 pip3 install --upgrade awscli
 
-cat << EOF > /home/ubuntu/.aws/config
-[default]
-region = us-east-1
-output = json
-EOF
-
 # Check your keys with ```apt-key --list```
 
 # Nvidia-docker
@@ -90,7 +84,7 @@ chown -R ubuntu:ubuntu ${VOLTA_BUILD_HOME_DIR}
 # Update the file locations index
 updatedb
 
-## Todo: Add git clone for voltaPytorchBuild folder
+## Todo: Add git clone for voltaBuild folder
 
 # git clone the repo.
 
