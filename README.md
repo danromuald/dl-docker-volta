@@ -30,7 +30,7 @@ Here is the folder structure:
     └── README.md
 ```
 
-## Preparing the Host
+## Preparing the host
 
 To get started, you need to prepare your host machine, which will run the containers. We use [Ubuntu 16.04 Xenial][4] as the base image. On it, we install the following:
 
@@ -139,6 +139,7 @@ reboot /r
 
 ```
 
+#
 
 
 [1]:	https://www.nvidia.com/en-us/data-center/tesla-v100/
