@@ -16,7 +16,7 @@ cat <<EOF
 #    - Jetson TX2: 6.2                                                                      #
 #    - Volta V100: 7.0+PTX (PTX = parallel Thread Execution): even faster!                  #
 #                                                                                           #
-#   Release ${DANULAB_PYTORCH_IMAGE_VERSION} (build ${DANULAB_PYTORCH_BUILD_VERSION})       #
+   Release ${DANULAB_PYTORCH_IMAGE_VERSION} (build ${DANULAB_PYTORCH_BUILD_VERSION})       
 #                                                                                           #
 #                                                                                           #
 #                                                                                           #

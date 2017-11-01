@@ -51,18 +51,20 @@ pip3 install --upgrade awscli
 
 # Check your keys with ```apt-key --list```
 
-# Nvidia-docker
+# Install Nvidia-docker
 
 wget -P /tmp https://github.com/NVIDIA/nvidia-docker/releases/download/v1.0.1/nvidia-docker_1.0.1-1_amd64.deb
+
 dpkg -i /tmp/nvidia-docker_1.0.1-1_amd64.deb
+
 # service nvidia-docker start   # not necessary, reboot at the end.
 
-# Install nvidia-modprobe and nvidia-384 (plugins)
+# Install nvidia-modprobe and nvidia-384 (plugins and drivers)
 
 apt-get install -y nvidia-modprobe nvidia-384
 
 #################### Health check commands ##################
-#
+#                                                           #
 # journalctl -n -u nvidia-docker                            #
 # nvidia-modprobe -u -c=0                                   #
 #                                                           #
@@ -84,9 +86,8 @@ chown -R ubuntu:ubuntu ${VOLTA_BUILD_HOME_DIR}
 # Update the file locations index
 updatedb
 
-## Todo: Add git clone for voltaBuild folder
-
-# git clone the repo.
+## Todo (FOR YOU): Add the build files (Dockerfile and entrypoint.sh)
+##  for each framework you'd like to build, in the ${VOLTA_BUILD_HOME_DIR}
 
 # REBOOT for nvidia plugins and service to take effect
 

@@ -14,10 +14,12 @@ ENV DANULAB_ANACONDA_CHANNEL etcshadow
 
 RUN echo 'export PS1="\[\033[01;32m\]\u@\h \[\033[00m\]: \[\033[01;34m\]\w \[\033[00m\]\$"' >> /etc/profile
 
-ENV PYTORCH_WORK_DIR /pytorch-work
+ENV PYTORCH_WORK_DIR /pytorch-workspace
+
+###############################
 # First, install apt-utils
 
-RUN apt-get-update
+RUN apt-get update
 
 RUN apt-get install -y apt-utils
 
@@ -110,7 +112,7 @@ RUN chmod +x /opt/pytorch-init/entrypoint.sh
 
 # Working directory + examples
 
-WORKDIR /pytorch-work
+WORKDIR ${PYTORCH_WORK_DIR}
 
 RUN git clone --recursive https://github.com/pytorch/examples.git
 
@@ -122,7 +124,11 @@ RUN git clone --recursive https://github.com/pytorch/text.git && \
 
 RUN git clone --recursive https://github.com/pytorch/tutorials.git
 
-RUN chmod -R a+w /pytorch-work
+RUN chmod -R a+w ${PYTORCH_WORK_DIR}
+
+# A reference for exposing jupyter notebooks
+EXPOSE 8888
+EXPOSE 6006
 
 RUN updatedb
 
