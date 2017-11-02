@@ -1,15 +1,15 @@
 FROM nvidia/cuda:9.0-devel-ubuntu16.04
-LABEL maintainer="Dan R. Mbanga <dmmbanga@amazon.com>"
+LABEL maintainer="Dan R. Mbanga"
 # vars
-    ## Python version
+## Python version
 ENV PYTHON_VERSION 3.5
 ENV CUDNN_VERSION 7.0.3.11
 LABEL com.nvidia.cudnn.version="${CUDNN_VERSION}"
-    ## The version of this Docker container
+## The version of this Docker container
 ENV DANULAB_PYTORCH_IMAGE_VERSION 17.10
 ENV DANULAB_PYTORCH_BUILD_VERSION 1.0
-    ## Dan's Anaconda channel for magma-cuda90. I had to build the package to support cuda9.0.
-    ## Not yet available on the default Anaconda repository.
+## Dan's Anaconda channel for magma-cuda90. I had to build the package to support cuda9.0.
+## Not yet available on the default Anaconda repository.
 ENV DANULAB_ANACONDA_CHANNEL etcshadow
 
 RUN echo 'export PS1="\[\033[01;32m\]\u@\h \[\033[00m\]: \[\033[01;34m\]\w \[\033[00m\]\$"' >> /etc/profile
@@ -28,34 +28,34 @@ RUN echo "deb http://developer.download.nvidia.com/compute/machine-learning/repo
 RUN apt-get update
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
-            libcudnn7=$CUDNN_VERSION-1+cuda9.0 \
-            libcudnn7-dev=$CUDNN_VERSION-1+cuda9.0 \
-            build-essential \
-            cmake \
-            git \
-            curl \
-            vim \
-            tmux \
-            mlocate \
-            htop \
-            ca-certificates \
-            libnccl2=2.0.5-3+cuda9.0 \
-            libnccl-dev=2.0.5-3+cuda9.0 \
-            libjpeg-dev \
-            libpng-dev &&\
+    libcudnn7=$CUDNN_VERSION-1+cuda9.0 \
+    libcudnn7-dev=$CUDNN_VERSION-1+cuda9.0 \
+    build-essential \
+    cmake \
+    git \
+    curl \
+    vim \
+    tmux \
+    mlocate \
+    htop \
+    ca-certificates \
+    libnccl2=2.0.5-3+cuda9.0 \
+    libnccl-dev=2.0.5-3+cuda9.0 \
+    libjpeg-dev \
+    libpng-dev &&\
     rm -rf /var/lib/apt/lists/*
 
 # Install Anaconda full. Not miniconda.
 # https://repo.continuum.io/archive/Anaconda3-5.0.1-Linux-x86_64.sh
 
 RUN curl -o ~/anaconda3-latest.sh -O  https://repo.continuum.io/archive/Anaconda3-5.0.1-Linux-x86_64.sh  && \
-     chmod +x ~/anaconda3-latest.sh && \
-     ~/anaconda3-latest.sh -b -p /opt/conda && \
-     rm ~/anaconda3-latest.sh && \
-     /opt/conda/bin/conda install conda-build && \
-     /opt/conda/bin/conda create -y --name pytorch-py35 python=${PYTHON_VERSION} \
-        anaconda numpy pyyaml scipy ipython mkl jupyter && \
-     /opt/conda/bin/conda clean -ya
+    chmod +x ~/anaconda3-latest.sh && \
+    ~/anaconda3-latest.sh -b -p /opt/conda && \
+    rm ~/anaconda3-latest.sh && \
+    /opt/conda/bin/conda install conda-build && \
+    /opt/conda/bin/conda create -y --name pytorch-py35 python=${PYTHON_VERSION} \
+    anaconda numpy pyyaml scipy ipython mkl jupyter && \
+    /opt/conda/bin/conda clean -ya
 
 ENV PATH /opt/conda/envs/pytorch-py35/bin:$PATH
 
@@ -71,9 +71,8 @@ ENV PATH /opt/conda/envs/pytorch-py35/bin:$PATH
 # RUN conda install ./magma-cuda90-2.1.0-h865527f_5.tar.bz2                             #
 #########################################################################################
 
-#
+
 RUN conda install --name pytorch-py35 -c ${DANULAB_ANACONDA_CHANNEL} magma-cuda90
-# This must be done before pip so that requirements.txt is available
 
 WORKDIR /opt
 
@@ -128,7 +127,8 @@ RUN chmod -R a+w ${PYTORCH_WORK_DIR}
 
 # A reference for exposing jupyter notebooks
 EXPOSE 8888
-EXPOSE 6006
+
+# This helps you easily locate files on the box with ```mlocate <filename>```
 
 RUN updatedb
 

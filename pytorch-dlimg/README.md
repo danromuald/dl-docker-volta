@@ -1,35 +1,41 @@
-# PyTorch Volta Deep Learning container on AWS P3
+# Building a PyTorch Volta Deep Learning container on AWS EC2 P3
 
-## Running PyTorch and Anaconda3 on Volta on Amazon EC2
+# 1. What you get
 
-# 1. Introduction
+- PyTorch
+- Full Anaconda3 with Scipy, Nunpy, Matplotlit, Scikit-learn, mkl, Jupyter and more
+- Nvidia Volta GPU
+- Cuda9 SDK
+- PyTorch examples
 
-PyTorch
-Volta
-Cuda9
 
 # 2. Environment and Prerequisites
 
-AWS P3
-Ubuntu image
+- Amazon EC2 P3 instance
+- Ubuntu image
 
-# 3. Supported Compute Capabilities
+# 3. Supported GPU Compute Capabilities
 
-AWS P2
+
+- Kepler: 3.7+PTX, for the AWS EC2 P2 instances.
+- Maxwell: 5.0 5.2                                             
+- Jetson TX1: 5.3                                              
+- Pascal P100: 6.0                                             
+- Pascal GTX family: 6.1                                       
+- Jetson TX2: 6.2                                             
+- Volta V100: 7.0+PTX           
+
+```PTX = Parallel Thread Execution```.
 
 # 4. Installation
 
-## 4.1 Base Docker image
-Download the sample docker file from the docker hub.
-You need the version that runs CUDA9.
+# 4.1 Launch an Ubuntu16.04 Machine
 
-## 4.2 Cuda9 and cuDNN7 libraries
-Get the appropriate version of related CUDA libraries
+## Todo:
+    - Add img for the mainch
 
-```bash
-dpkg --list | grep libnccl
-dpkg --list | grep libcudnn
-```
+[prepare](../prepare_ubuntu-xenial-amd64.sh)
+
 ## 4.3 Anaconda Cloud and magma-cuda90
 
 ## 4.4 Prepare the Ubuntu EC2 Machine
@@ -55,21 +61,23 @@ dpkg --list | grep libcudnn
 
 ### Build
 
-```bash
+```Bash
 nvidia-docker build -t danulab/pytorch-dlimg:17.10 -t danulab/pytorch-
 dlimg:v1.0 -t danulab/pytorch-dlimg:latest .
 ```
 
 Last lines:
 
-```bash
+```Bash
 Successfully tagged danulab/pytorch-dlimg:17.10
 Successfully tagged danulab/pytorch-dlimg:v1.0
 Successfully tagged danulab/pytorch-dlimg:latest
 ```
 # 5. Test 
 
+
 # 6. Conclusion
+
 
 
 

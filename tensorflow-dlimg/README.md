@@ -1,1 +1,3 @@
-# Tensorflow Volta Deep Learning container on AWS P3
+# Building a Tensorflow Volta Deep Learning container on AWS EC2 P3
+
+# TBD

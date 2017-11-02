@@ -4,3 +4,6 @@
 
 # 
 spot-launch-config.json
+
+# Local files
+.local
