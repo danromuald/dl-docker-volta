@@ -42,6 +42,8 @@ echo
 
 nvidia-smi
 
+cd ${PYTORCH_WORK_DIR}
+
 if [[ $# -eq 0 ]]; then
   exec "/bin/bash"
 else
