@@ -149,50 +149,23 @@ Verify that the Nvidia drivers and plugins are installed, and that the service w
 
 ```bash
 
-ubuntu@ip-10-0-1-216:~$ service nvidia-docker status
-
+ubuntu@ip-10-0-1-205:~$ service nvidia-docker status
 ● nvidia-docker.service - NVIDIA Docker plugin
    Loaded: loaded (/lib/systemd/system/nvidia-docker.service; enabled; vendor preset: enabled)
-   Active: active (running) since Sun 2017-10-29 16:23:21 UTC; 1min 46s ago
+   Active: active (running) since Mon 2017-10-30 09:26:32 UTC; 3 days ago
      Docs: https://github.com/NVIDIA/nvidia-docker/wiki
-  Process: 1338 ExecStartPost=/bin/sh -c /bin/echo unix://$SOCK_DIR/nvidia-docker.sock > $SPEC_FILE (code=exited, status=0/SUCCESS)
-  Process: 1327 ExecStartPost=/bin/sh -c /bin/mkdir -p $( dirname $SPEC_FILE ) (code=exited, status=0/SUCCESS)
- Main PID: 1326 (nvidia-docker-p)
-    Tasks: 9
-   Memory: 28.2M
-      CPU: 905ms
+  Process: 1341 ExecStartPost=/bin/sh -c /bin/echo unix://$SOCK_DIR/nvidia-docker.sock > $SPEC_FILE (code=exited, status=0/SUCCESS)
+  Process: 1326 ExecStartPost=/bin/sh -c /bin/mkdir -p $( dirname $SPEC_FILE ) (code=exited, status=0/SUCCESS)
+ Main PID: 1325 (nvidia-docker-p)
+    Tasks: 14
+   Memory: 33.8M
+      CPU: 6.801s
    CGroup: /system.slice/nvidia-docker.service
-           └─1326 /usr/bin/nvidia-docker-plugin -s /var/lib/nvidia-docker
+           └─1325 /usr/bin/nvidia-docker-plugin -s /var/lib/nvidia-docker
 
-Oct 29 16:23:21 ip-10-0-1-216 systemd[1]: Starting NVIDIA Docker plugin...
-Oct 29 16:23:21 ip-10-0-1-216 systemd[1]: Started NVIDIA Docker plugin.
-Oct 29 16:23:21 ip-10-0-1-216 nvidia-docker-plugin[1326]: /usr/bin/nvidia-docker-plugin | 2017/10/29 16:23:21 Loading NVIDIA unified memory
-Oct 29 16:23:21 ip-10-0-1-216 nvidia-docker-plugin[1326]: /usr/bin/nvidia-docker-plugin | 2017/10/29 16:23:21 Loading NVIDIA management library
-Oct 29 16:23:22 ip-10-0-1-216 nvidia-docker-plugin[1326]: /usr/bin/nvidia-docker-plugin | 2017/10/29 16:23:22 Discovering GPU devices
-Oct 29 16:23:22 ip-10-0-1-216 nvidia-docker-plugin[1326]: /usr/bin/nvidia-docker-plugin | 2017/10/29 16:23:22 Provisioning volumes at /var/lib/nvidia-docker/volumes
-Oct 29 16:23:22 ip-10-0-1-216 nvidia-docker-plugin[1326]: /usr/bin/nvidia-docker-plugin | 2017/10/29 16:23:22 Serving plugin API at /var/lib/nvidia-docker
-Oct 29 16:23:22 ip-10-0-1-216 nvidia-docker-plugin[1326]: /usr/bin/nvidia-docker-plugin | 2017/10/29 16:23:22 Serving remote API at localhost:3476
-
-ubuntu@ip-10-0-1-216:~$ nvidia-docker images -a
-nvidia-docker | 2017/10/29 16:25:5
 ```
 
-Another way to verify it the service is up and running:
 
-```bash
-
-ubuntu@ip-10-0-1-216:~$ journalctl -n -u nvidia-docker
-
--- Logs begin at Sun 2017-10-29 16:23:17 UTC, end at Sun 2017-10-29 16:24:47 UTC. --
-Oct 29 16:23:21 ip-10-0-1-216 systemd[1]: Starting NVIDIA Docker plugin...
-Oct 29 16:23:21 ip-10-0-1-216 systemd[1]: Started NVIDIA Docker plugin.
-Oct 29 16:23:21 ip-10-0-1-216 nvidia-docker-plugin[1326]: /usr/bin/nvidia-docker-plugin | 2017/10/29 16:23:21 Loading NVIDIA unified memory
-Oct 29 16:23:21 ip-10-0-1-216 nvidia-docker-plugin[1326]: /usr/bin/nvidia-docker-plugin | 2017/10/29 16:23:21 Loading NVIDIA management library
-Oct 29 16:23:22 ip-10-0-1-216 nvidia-docker-plugin[1326]: /usr/bin/nvidia-docker-plugin | 2017/10/29 16:23:22 Discovering GPU devices
-Oct 29 16:23:22 ip-10-0-1-216 nvidia-docker-plugin[1326]: /usr/bin/nvidia-docker-plugin | 2017/10/29 16:23:22 Provisioning volumes at /var/lib/nvidia-docker/volumes
-Oct 29 16:23:22 ip-10-0-1-216 nvidia-docker-plugin[1326]: /usr/bin/nvidia-docker-plugin | 2017/10/29 16:23:22 Serving plugin API at /var/lib/nvidia-docker
-Oct 29 16:23:22 ip-10-0-1-216 nvidia-docker-plugin[1326]: /usr/bin/nvidia-docker-plugin | 2017/10/29 16:23:22 Serving remote API at localhost:3476
-```
 
 Pull the base Nvidia Docker image (```nvidia/cuda:9.0-devel-ubuntu16.04```) which comes with Cuda SDK version 9. This base image will be used by Docker to build the rest of the deep learning machine with PyTorch in it. 
 
@@ -201,8 +174,8 @@ Pull the base Nvidia Docker image (```nvidia/cuda:9.0-devel-ubuntu16.04```) whic
 nvidia-docker run --rm nvidia/cuda nvidia-smi
 
 
-ubuntu@ip-10-0-1-216:~$ nvidia-docker run --rm nvidia/cuda nvidia-smi
-Sun Oct 29 16:28:29 2017       
+ubuntu@ip-10-0-1-205:~$ nvidia-docker run --rm nvidia/cuda:9.0-devel-ubuntu16.04 nvidia-smi
+Fri Nov  3 05:54:15 2017
 +-----------------------------------------------------------------------------+
 | NVIDIA-SMI 384.90                 Driver Version: 384.90                    |
 |-------------------------------+----------------------+----------------------+
@@ -210,27 +183,9 @@ Sun Oct 29 16:28:29 2017
 | Fan  Temp  Perf  Pwr:Usage/Cap|         Memory-Usage | GPU-Util  Compute M. |
 |===============================+======================+======================|
 |   0  Tesla V100-SXM2...  Off  | 00000000:00:1E.0 Off |                    0 |
-| N/A   32C    P0    21W / 300W |     10MiB / 16152MiB |      0%      Default |
+| N/A   41C    P0    23W / 300W |     10MiB / 16152MiB |      0%      Default |
 +-------------------------------+----------------------+----------------------+
-                                                                               
-+-----------------------------------------------------------------------------+
-| Processes:                                                       GPU Memory |
-|  GPU       PID   Type   Process name                             Usage      |
-|=============================================================================|
-|  No running processes found                                                 |
-+-----------------------------------------------------------------------------+
-ubuntu@ip-10-0-1-216:~$ sudo nvidia-docker run --rm 2fa9a0f996e2 nvidia-smi
-Sun Oct 29 16:28:42 2017       
-+-----------------------------------------------------------------------------+
-| NVIDIA-SMI 384.90                 Driver Version: 384.90                    |
-|-------------------------------+----------------------+----------------------+
-| GPU  Name        Persistence-M| Bus-Id        Disp.A | Volatile Uncorr. ECC |
-| Fan  Temp  Perf  Pwr:Usage/Cap|         Memory-Usage | GPU-Util  Compute M. |
-|===============================+======================+======================|
-|   0  Tesla V100-SXM2...  Off  | 00000000:00:1E.0 Off |                    0 |
-| N/A   32C    P0    21W / 300W |     10MiB / 16152MiB |      0%      Default |
-+-------------------------------+----------------------+----------------------+
-                                                                               
+
 +-----------------------------------------------------------------------------+
 | Processes:                                                       GPU Memory |
 |  GPU       PID   Type   Process name                             Usage      |
@@ -422,7 +377,7 @@ In this case, I ran:
 ```bash
 
 nvidia-docker build -t danulab/pytorch-dlimg:17.10 -t danulab/pytorch-
-dlimg:v1.0 -t danulab/pytorch-dlimg:latest .
+dlimg:v1.0 -t danulab/pytorch-dlimg:latest --rm=true .
 
 ```
 
