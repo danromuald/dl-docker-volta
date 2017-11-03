@@ -1,7 +1,4 @@
-# Build Your Own Deep Learning Workspaces on Amazon EC2 P3 instances
-
-Deep learning Docker containers built for Nvidia's Volta GPU on Amazon EC2 P3 instances.
-
+# Build Your Own Pytorch Deep Learning Docker Container for NVidia's Volta GPUs on Amazon EC2 P3 instances 
 
 
 # 1. Introduction
