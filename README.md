@@ -149,7 +149,7 @@ Verify that the Nvidia drivers and plugins are installed, and that the service w
 
 ```bash
 
-ubuntu@ip-10-0-1-205:~$ service nvidia-docker status
+service nvidia-docker status
 ● nvidia-docker.service - NVIDIA Docker plugin
    Loaded: loaded (/lib/systemd/system/nvidia-docker.service; enabled; vendor preset: enabled)
    Active: active (running) since Mon 2017-10-30 09:26:32 UTC; 3 days ago
@@ -171,10 +171,7 @@ Pull the base Nvidia Docker image (```nvidia/cuda:9.0-devel-ubuntu16.04```) whic
 
 ```bash
 
-nvidia-docker run --rm nvidia/cuda nvidia-smi
-
-
-ubuntu@ip-10-0-1-205:~$ nvidia-docker run --rm nvidia/cuda:9.0-devel-ubuntu16.04 nvidia-smi
+nvidia-docker run --rm nvidia/cuda:9.0-devel-ubuntu16.04 nvidia-smi
 Fri Nov  3 05:54:15 2017
 +-----------------------------------------------------------------------------+
 | NVIDIA-SMI 384.90                 Driver Version: 384.90                    |
@@ -398,7 +395,7 @@ Congrats! You now have a running docker environment, built for Volta, with Cuda9
 
 # Run the docker container in interactive mode.
 
-ubuntu@ip-10-0-1-216:~$ nvidia-docker run -it  danulab-pytorch 
+nvidia-docker run -it  danulab-pytorch 
 
 root@a780acd1a36d:/python-workspace# 
 
