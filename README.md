@@ -415,7 +415,7 @@ A few things happen here:
 
 ## 4.2 Build the Docker image
 
-Move to the ```/optvoltaBuild/pytorch-dlimg/``` folder, and run ```nvidia-docker build -t <image-name>:<tag-name> .``` to build the image. 
+Move to the ```/opt/voltaBuild/pytorch-dlimg/``` folder, and run ```nvidia-docker build -t <image-name>:<tag-name> .``` to build the image. 
 
 In this case, I ran: 
 
